@@ -17,7 +17,7 @@ public with sharing class StaleOpportunityBatch  implements Database.Batchable<S
     return Database.getQueryLocator([SELECT Id, StageName FROM Opportunity WHERE IsClosed = false AND CloseDate < :periode]);
    }
 
-   public void execute(Database.BatchableContext context, List<Opportunity> tergetedOpportunities){
+   public void execute(Database.BatchableContext context, List<Opportunity> targetedOpportunities){
     for(Opportunity opp : targetedOpportunities){
         opp.StageName = 'Closed Lost';
     }
