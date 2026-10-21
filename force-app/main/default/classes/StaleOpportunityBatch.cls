@@ -34,4 +34,8 @@ public with sharing class StaleOpportunityBatch  implements Database.Batchable<S
     public void finish(Database.BatchableContext context){
         System.debug('StaleOpportunityBatch done. Updated: ' + succeeded + ', failed: ' + failed);
     }
+
+    public void execute(SchedulableContext context){
+        Database.executeBatch(new StaleOpportunityBatch(daysOverdue), 200);
+    }
 }
